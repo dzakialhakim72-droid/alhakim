@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
 {
-    //
     public function index()
     {
         $mahasiswa = [
@@ -15,9 +14,9 @@ class MahasiswaController extends Controller
             'prodi' => 'Sistem Informasi',
             'kampus' => 'Universitas Pamulang',
             'email' => 'dzakialhhakim72@gmail.com',
-            'status' => 'aktif',
+            'status' => 'Aktif',
         ];
-        return view('mahasiswa', compact('mahasiswa'));
-    }
 
+        return view('page.profile', compact('mahasiswa'));
+    }
 }
