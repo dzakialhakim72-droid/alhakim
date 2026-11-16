@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>@yield('title', 'Admin Panel')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
     <script src="{{ asset('DataTables/jquery-3.6.1.js') }}"></script>
@@ -62,7 +62,10 @@ body {
                 <a class="nav-link text-white" href="{{ route('admin.home') }}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">Projects</a>
+                <a class="nav-link text-white" href="{{ route('admin.project.index') }}">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('logout') }}">Logout</a>
             </li>
         </ul>
     </div>
@@ -70,8 +73,14 @@ body {
         <div
             class="d-flex justify-content-between align-items-center pb-3 mb-4 border-bottom bg-white rounded shadow-sm">
             <h3 class="fw-bold mb-0">Admin Dashboard</h3>
-            <span class="text-muted fw-semibold">Halo, Administrator</span>
+            <span class="text-muted fw-semibold">Halo, {{ Auth::user()->name }}!</span>
         </div>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         @yield('content')
     </div>
     @stack('scripts')
